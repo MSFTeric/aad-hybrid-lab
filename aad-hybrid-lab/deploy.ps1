@@ -2,28 +2,29 @@
 Write-Host "Beginning deployment at $starttime"
 
 Import-Module Azure -ErrorAction SilentlyContinue
+Import-Module AzureRM -ErrorAction SilentlyContinue
 
 #DEPLOYMENT OPTIONS
-    $vmSize                  = "Standard_A2_v2"
+    $vmSize                  = "Standard_B2s"
 
     # Must be unique for simultaneous/co-existing deployments
-    $RGName                  = "<YOUR RESOURCE GROUP>"
-    $DeployRegion            = "<SELECT AZURE REGION>"
+    $RGName                  = "Infra"
+    $DeployRegion            = "East US 2"
 
     # "master" or "dev"
     $Branch                  = "master"
 
-    $userName                = "<AD ADMINISTRATOR LOGIN>"
-    $secpasswd               = “<AD ADMINISTRATOR PASSWORD>”
+    $userName                = "ADadmin"
+    $secpasswd               = “WVD@zureL@b2019!”
 
-    $adDomainName            = "<2-PART AD DOMAIN NAME, LIKE CONTOSO.COM>"
+    $adDomainName            = "thefamousericmoe.com"
     $usersArray              = @(
                                 @{ "FName"= "Bob";  "LName"= "Jones";    "SAM"= "bjones" },
                                 @{ "FName"= "Bill"; "LName"= "Smith";    "SAM"= "bsmith" },
                                 @{ "FName"= "Mary"; "LName"= "Phillips"; "SAM"= "mphillips" },
                                 @{ "FName"= "Sue";  "LName"= "Jackson";  "SAM"= "sjackson" }
                                )
-    $defaultUserPassword     = "P@ssw0rd"
+    $defaultUserPassword     = "WVD@zureL@b2019!"
 
 	# custom resolution for generated RDP connections
     $RDPWidth                = 1920
@@ -31,7 +32,7 @@ Import-Module Azure -ErrorAction SilentlyContinue
 #END DEPLOYMENT OPTIONS
 
 #Dot-sourced variable override (optional, comment out if not using)
-. "$($env:PSH_Settings_Files)aad-hybrid-lab.ps1"
+#. "$($env:PSH_Settings_Files)aad-hybrid-lab.ps1"
 
 #ensure we're logged in
 Get-AzureRmContext -ErrorAction Stop
@@ -53,7 +54,7 @@ $parms=@{
     "adSubnetAddressRange"        = "10.$VNetAddrSpace2ndOctet.1.0/24";
     #if multiple deployments will need to route between vNets, be sure to make this distinct between them
     "usersArray"                  = $usersArray;
-    "defaultUserPassword"         = "P@ssw0rd";
+    "defaultUserPassword"         = "WVD@zureL@b2019!";
 }
 
 $version ++
