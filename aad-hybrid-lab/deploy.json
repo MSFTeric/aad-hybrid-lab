@@ -7,7 +7,12 @@
       "defaultValue": "https://raw.githubusercontent.com/MSFTeric/aad-hybrid-lab/master/aad-hybrid-lab/",
       "metadata": { "description": "This is the location in which all the linked templates are stored." }
     },
-    "adminUsername": {
+    "masterAssetLocation": {
+      "type": "string",
+      "defaultValue": "https://raw.githubusercontent.com/master/aad-hybrid-lab/master/aad-hybrid-lab/",
+      "metadata": { "description": "This is the location in which all the linked templates are stored." }
+    },	
+	"adminUsername": {
       "type": "string",
       "defaultValue": "localAdmin",
       "metadata": { "description": "Username to set for the local User. Cannot be \"Administrator\", \"root\" and possibly other such common account names. " }
@@ -89,14 +94,14 @@
     "vnetID": "[resourceId('Microsoft.Network/virtualNetworks', variables('virtualNetworkName'))]",
     "adSubnetName": "[concat('adSubnet', parameters('deploymentNumber'))]",
     "adSubnetID": "[concat(variables('vnetID'),'/subnets/',variables('adSubnetName'))]",
-    "adTemplateURI": "[concat(parameters('assetLocation'),'Templates/adDeploy.json')]",
+    "adTemplateURI": "[concat(parameters('masterAssetLocation'),'Templates/adDeploy.json')]",
     "imageOffer": "WindowsServer",
     "imagePublisher": "MicrosoftWindowsServer",
     "imageSKU": "2012-R2-Datacenter",
-    "nsgTemplateURI": "[concat(parameters('assetLocation'),'Templates/NSGs.json')]",
-    "vnetTemplateURI": "[concat(parameters('assetLocation'),'Templates/deployVNet.json')]",
-    "vnetDNSTemplateURI": "[concat(parameters('assetLocation'),'Templates/deployVNetDNS.json')]",
-    "adDSCTemplate": "[concat(parameters('assetLocation'),'DSC/adDSC.zip')]",
+    "nsgTemplateURI": "[concat(parameters('masterAssetLocation'),'Templates/NSGs.json')]",
+    "vnetTemplateURI": "[concat(parameters('masterAssetLocation'),'Templates/deployVNet.json')]",
+    "vnetDNSTemplateURI": "[concat(parameters('masterAssetLocation'),'Templates/deployVNetDNS.json')]",
+    "adDSCTemplate": "[concat(parameters('masterAssetLocation'),'DSC/adDSC.zip')]",
     "adDSCConfigurationFunction": "adDSCConfiguration.ps1\\DomainController",
     "subnets": [
       {
